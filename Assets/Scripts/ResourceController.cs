@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ResourceController : MonoBehaviour
 {
+    public AudioSource Upgrade;
     public Button ResourceButton;
     public Image ResourceImage;
     public Text ResourceDescription;
@@ -65,6 +66,7 @@ public class ResourceController : MonoBehaviour
 
         GameManager.Instance.AddGold (-upgradeCost);
         _level++;
+        Upgrade.Play();
         ResourceUpgradeCost.text = $"Upgrade Cost\n{ GetUpgradeCost () }";
         ResourceDescription.text = $"{ _config.Name } Lv. { _level }\n+{ GetOutput ().ToString ("0") }";
     }
