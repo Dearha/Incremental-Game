@@ -8,6 +8,7 @@ public class AchievementController : MonoBehaviour
     // Instance ini mirip seperti pada GameManager, fungsinya adalah membuat sistem singleton
     // untuk memudahkan pemanggilan script yang bersifat manager dari script lain
     private static AchievementController _instance = null;
+    public ParticleSystem confetti;
 
     public static AchievementController Instance
     {
@@ -23,7 +24,7 @@ public class AchievementController : MonoBehaviour
 
     [SerializeField] private Transform _popUpTransform;
     [SerializeField] private Text _popUpText;
-    [SerializeField] private float _popUpShowDuration = 3f;
+    [SerializeField] private float _popUpShowDuration = 11f;
     [SerializeField] private List<AchievementData> _achievementList;
     private float _popUpShowDurationCounter;
 
@@ -55,6 +56,10 @@ public class AchievementController : MonoBehaviour
 
     private void ShowAchivementPopUp (AchievementData achievement)
     {
+        //Tambah audio source
+        AudioSource audioData = GetComponent<AudioSource>();
+        audioData.Play(0);
+        confetti.Play();
         _popUpText.text = achievement.Title;
         _popUpShowDurationCounter = _popUpShowDuration;
         _popUpTransform.localScale = Vector2.right;
